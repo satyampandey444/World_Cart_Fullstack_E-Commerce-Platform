@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Edit Product{% endblock %}
+
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div id="flash-messages" class="mx-auto px-6 py-4 items-center font-sans text-lg font-bold text-white bg-green-500 rounded-lg shadow-lg text-center mb-4">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+
+<div class="mt-5 py-16 bg-gray-100 container mx-auto px-4">
+  <!-- Product List -->
+  <div class="bg-white shadow-lg rounded-lg p-6 max-w-3xl mx-auto mt-8">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Products</h2>
+    <ul id="productList" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {% for product in products %}
+        <li class="p-4 border rounded-lg bg-gray-100 flex flex-col justify-between items-center transition-transform transform hover:scale-105" data-id="{{ product.product_id }}">
+          <div class="flex flex-col items-center">
+            <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}" class="mb-4 w-full h-48 object-cover rounded-md">
+            <span class="text-lg font-semibold text-gray-700 product-name">{{ product.name }}</span>
+            <p class="text-gray-600"><strong>Price:</strong> ₹<span class="product-price">{{ product.price }}</span></p>
+            <p class="text-gray-600"><strong>Quantity:</strong> <span class="product-quantity">{{ product.quantity }}</span></p>
+            <p class="text-gray-600"><strong>Description:</strong> <span class="product-description">{{ product.description }}</span></p>
+          </div>
+          <div class="mt-4">
+            <a href="{{ url_for('edit_product', product_id=product.product_id) }}" class="bg-indigo-500 text-white px-4 py-2 rounded-md text-sm hover:bg-indigo-600 transition duration-300">Edit</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+{% endblock %}

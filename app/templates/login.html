@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}
+
+    Login
+
+    {% endblock %}
+{% block items2 %}
+<a href="{{url_for('signup')}}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Sign Up</a>
+<a href="{{url_for('login')}}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Sign In</a>
+{% endblock %}
+{% block body %}
+<div class="bg-indigo-500 min-h-screen">
+    <main class="main px-6 md:px-16 py-6 ">
+        <div class="w-full bg-white border-b-1 rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
+            <form action="/api/login" method="post" class="border-b-2 py-3 mb-4 max-w-xs mx-10 md:justify-center">
+                <h1 class=" text-black text-center mb-6 text-3xl font-black">Log in</h1>
+                <div class="mb-4">
+                    <label class="mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" for="email">Email</label>
+                    <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" 
+                           type="email" id="email" name="email" placeholder="worldcart@email.com">
+                </div>
+                <div class="mb-4 relative">
+                    <label class="mb-2 uppercase tracking-wide font-bold text-lg text-grey-darkest" for="password">Password</label>
+                    <div class="relative">
+                        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500" 
+                               type="password" id="password" name="password" placeholder="******************">
+                        <button type="button" onclick="togglePassword()" 
+                                class="absolute inset-y-0 right-3 flex items-center text-gray-500 focus:outline-none">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="text-gray-600 flex items-center" for="remember">
+                        <input class="mr-2 leading-tight" type="checkbox" id="remember">
+                        <span class="text-sm">Remember me</span>
+                    </label>
+                </div>
+                <div>
+                    <button class="bg-teal-500 hover:bg-teal-600 text-white  py-2 px-3 rounded">Log in</button>
+                </div>
+            </form>
+            <div class="mt-2 mb-3">
+                <a href="{{url_for('signup')}}" class="text-sm text-teal-500 hover:text-teal-600 hover:underline">Sign up</a>
+                <br>
+                <a href="#" class="text-sm text-teal-500 hover:text-teal-600 hover:underline">Forgot your password?</a>
+                <br>
+                <a href="{{url_for('admin_login')}}" class="text-sm text-teal-500 hover:text-teal-600 hover:underline">Not a User ? Admin </a>
+            </div>
+        </div>
+    </main>
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+</div>
+
+{% endblock %}

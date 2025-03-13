@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}
+    Profile
+{% endblock %}
+{% block items %}
+<div class="hidden md:flex space-x-6">
+  <a href="{{url_for('index')}}" class="text-gray-600 hover:text-indigo-600">Home</a>
+  <a href="{{url_for('search_page')}}" class="text-gray-600 hover:text-indigo-600">Search Products</a>
+  <a href="{{url_for('new_products')}}" class="text-gray-600 hover:text-indigo-600">New Products</a>
+  <a href="{{url_for('contact')}}" class="text-gray-600 hover:text-indigo-600">Contact Us</a>
+</div>
+{% endblock %}
+{% block items2 %}
+<div class="hidden md:flex space-x-4">
+  <a href="{{url_for('cart')}}" class="bg-white text-black px-4 py-2 rounded-md shadow hover:bg-indigo-400"  id="cart-button">
+      🛒 Cart <span id="cart-count">0</span>
+  </a>
+  <a href="{{url_for('profile')}}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Profile</a>
+  <a href="{{url_for('logout')}}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Log Out</a>
+  </div>
+{% endblock %}
+{% block body %}
+<div class="bg-gray-100">
+  <div class="min-h-screen flex flex-col">
+    <!-- Profile Section -->
+    <main class="flex-grow container mx-auto py-8 px-4">
+      <div class="bg-white shadow rounded-lg p-6">
+        <div class="flex items-center space-x-6">
+          <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-32 h-32 rounded-full border">
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">{{ user.first }} {{ user.last }}</h2>
+            <p class="text-gray-600">{{ user.email }}</p>
+            
+          </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Personal Information -->
+          <div class="col-span-1">
+            <h3 class="text-xl font-bold text-gray-700">Personal Information</h3>
+            <ul class="mt-4 space-y-2 text-gray-600">
+              <li><strong>Phone:</strong> {{ user.phone }}</li>
+              <li><strong>Address:</strong> {{ user.address }}</li>
+            </ul>
+            <form method="POST">
+              <input type="hidden" name="edit_profile" value="1">
+              <div class="mt-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email" value="{{ user.email }}" class="mt-1 block w-full border-black-600 rounded-md shadow-sm">
+              </div>
+              <div class="mt-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password" id="password" class="mt-1 block w-8 border border-black-600 rounded-md shadow-sm">
+              </div>
+              <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit Profile</button>
+            </form>
+          </div>
+
+          <!-- Order History -->
+          <div class="col-span-2">
+            <h3 class="text-xl font-bold text-gray-700">Order History</h3>
+            <div class="overflow-x-auto mt-4">
+              <table class="min-w-full bg-white border">
+                <thead>
+                  <tr class="bg-gray-200">
+                    <th class="py-2 px-4 text-left">Order ID</th>
+                    <th class="py-2 px-4 text-left">Date</th>
+                    <th class="py-2 px-4 text-left">Status</th>
+                    <th class="py-2 px-4 text-left">Total</th>
+                    <th class="py-2 px-4 text-left">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in orders %}
+                  <tr class="{{ 'bg-white' if loop.index is even else 'bg-gray-50' }}">
+                    <td class="py-2 px-4">#{{ order.id }}</td>
+                    <td class="py-2 px-4">{{ order.date.strftime('%Y-%m-%d') }}</td>
+                    <td class="py-2 px-4">{{ order.status }}</td>
+                    <td class="py-2 px-4">₹{{ order.total_amount }}</td>
+                    <td class="py-2 px-4">
+                      <a href="/order/{{ order.id }}" class="text-blue-500 hover:underline">View</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Settings -->
+        <div class="mt-8">
+          <h3 class="text-xl font-bold text-gray-700">Account Settings</h3>
+          <form method="POST">
+            <input type="hidden" name="delete_account" value="1">
+            <button type="submit" class="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete Account</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock %}

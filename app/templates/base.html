@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="shortcut icon" href="{{url_for('static',filename='assets/favicon.png')}}" type="image/x-icon" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/flashmsg.css') }}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        {% block Navbar %}
+        <nav class="bg-white shadow">
+            <div class=" mx-auto px-4 py-4 flex justify-between items-center">
+                <a class="text-4xl font-bold text-indigo-600">World Cart</a>
+                
+                    {% block items %}{% endblock %}
+                
+                <div>
+                    {% block items2 %}{% endblock %}
+                </div>
+            </div>
+        </nav>
+        {% endblock %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div id="flash-messages" class="mx-auto px-4 py-4 items-center font-sans text-2xl font-extrabold  {{ category }} px-6 py-4 rounded-lg shadow-lg text-center">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+        
+        {% block body %}
+          
+        {% endblock %}
+
+        <footer class="bg-gray-800 text-white py-6">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2024 WorldCart. All rights reserved.</p>
+            </div>
+        </footer>
+
+
+    </body>
+</html>
+<script>
+    // Wait for the page to load
+    document.addEventListener('DOMContentLoaded', function () {
+        // Find the flash message container
+        const flashMessages = document.getElementById('flash-messages');
+        if (flashMessages) {
+            // Set a timeout to remove the flash messages after 2 seconds
+            setTimeout(() => {
+                flashMessages.style.display = 'none';
+            }, 4000); // 2000 ms = 2 seconds
+        }
+    });
+</script>
+
