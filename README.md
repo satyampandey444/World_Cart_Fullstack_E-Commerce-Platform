@@ -13,7 +13,7 @@ For users:
 
 For admins:
 
-![World Cart](https://i.imgur.com/a/GnFECqw.gif)
+![World Cart](https://i.imgur.com/GnFECqw.gif)
 ## Key Features
 * User Functionality: Customers can easily browse products, add items to their cart, and complete purchases in a secure environment.
 * Admin Dashboard: Administrators can manage product listings, including adding, editing, and removing products, as well as monitoring inventory levels.
