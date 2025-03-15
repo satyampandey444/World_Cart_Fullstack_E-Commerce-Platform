@@ -32,15 +32,24 @@ To set up the project, follow these steps:
    ```bash
     git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce-Platform.git
     cd World_Cart_Fullstack_E-Commerce-Platform
-2. **Ensure pipenv is Installed:**
+2. **Create a Virtual Environment
+```sh
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+3. **Ensure pipenv is Installed:**
     ```bash
     pipenv install
-3. **Install All the Dependencies from requirements.txt:**
+4. **Install All the Dependencies from requirements.txt:**
      ```bash
      pipenv install -r requirements.txt
-4. **Activate the Virtual Environment**
+5. **Activate the Virtual Environment**
      ```bash
      pipenv shell
-5. **Run the Application**
+6. **Set Up Environment Variables
+
+     Create a `.env` file for sensitive API keys
+
+7. **Run the Application**
      ```bash
     run app.py# World_Cart_Fullstack_E-Commerce-Platform
