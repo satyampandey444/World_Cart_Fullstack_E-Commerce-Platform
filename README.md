@@ -32,8 +32,8 @@ To set up the project, follow these steps:
    ```bash
     git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce-Platform.git
     cd World_Cart_Fullstack_E-Commerce-Platform
-2. **Create a Virtual Environment
-    ```sh
+2. **Create a Virtual Environment**
+    ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
     ```
@@ -46,7 +46,7 @@ To set up the project, follow these steps:
 5. **Activate the Virtual Environment**
      ```bash
      pipenv shell
-6. **Set Up Environment Variables
+6. **Set Up Environment Variables**
 
      Create a `.env` file for sensitive API keys
 
