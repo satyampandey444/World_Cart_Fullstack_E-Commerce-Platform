@@ -30,7 +30,7 @@ To set up the project, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-    git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce_Platform.git
+    git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce-Platform.git
 2. **Ensure pipenv is Installed:**
     ```bash
     pipenv install
