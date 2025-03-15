@@ -9,11 +9,11 @@ World Cart : World Cart is a comprehensive e-commerce platform designed to facil
 
 For users:
 
-![World Cart](https://imgur.com/a/bfGceYQ)
+![World Cart](https://imgur.com/a/bfGceYQ.gif)
 
 For admins:
 
-![World Cart](https://imgur.com/a/GnFECqw)
+![World Cart](https://imgur.com/a/GnFECqw.gif)
 ## Key Features
 * User Functionality: Customers can easily browse products, add items to their cart, and complete purchases in a secure environment.
 * Admin Dashboard: Administrators can manage product listings, including adding, editing, and removing products, as well as monitoring inventory levels.
