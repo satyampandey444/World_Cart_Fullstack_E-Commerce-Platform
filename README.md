@@ -53,3 +53,34 @@ To set up the project, follow these steps:
 7. **Run the Application**
      ```bash
     run app.py# World_Cart_Fullstack_E-Commerce-Platform
+
+
+## Folder Structure
+```
+World_Cart_Fullstack_E-Commerce-Platform/
+│
+├── app/
+│   ├── __pycache__/
+│   ├── flask_session/
+│   ├── static/
+│   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── helping_functions.py
+│   │   ├── models.py
+│   │   ├── routes_admin.py
+│   │   ├── routes_users.py
+│   │   └── tailwind.config.js
+│
+├── instance/
+├── node_modules/
+├── .env
+├── .gitignore
+├── app.py
+├── COC.txt
+├── package-lock.json
+├── package.json
+├── README.md
+├── requirements.txt
+└── run_tailwind.sh
+```
+
