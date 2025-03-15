@@ -33,10 +33,10 @@ To set up the project, follow these steps:
     git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce-Platform.git
     cd World_Cart_Fullstack_E-Commerce-Platform
 2. **Create a Virtual Environment
-```sh
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
 3. **Ensure pipenv is Installed:**
     ```bash
     pipenv install
