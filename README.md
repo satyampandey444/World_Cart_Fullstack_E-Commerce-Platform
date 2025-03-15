@@ -9,7 +9,7 @@ World Cart : World Cart is a comprehensive e-commerce platform designed to facil
 
 For users:
 
-![World Cart](https://i.imgur.com/po3zcN6.gif)
+![World Cart](https://i.imgur.com/a/bfGceYQ.gif)
 
 For admins:
 
