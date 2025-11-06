@@ -83,4 +83,25 @@ World_Cart_Fullstack_E-Commerce-Platform/
 ├── requirements.txt
 └── run_tailwind.sh
 ```
+---
+
+## 🧑‍💻 Contributing
+
+Contributions are welcome!
+If you’d like to improve the project:
+Feel free to Contact
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** 
+
+---
+
+## 🤝 Connect
+
+Created with ❤️ by Satyam Pandey
+📧 Email: [satyampandey5505@gmail.com](mailto:satyampandey5505@gmail.com)
+🌍 GitHub: [satyampandey444](https://github.com/satyampandey444)
 
