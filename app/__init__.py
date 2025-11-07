@@ -40,11 +40,13 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# ✅ ✅ Automatically create tables on startup (free alternative to Shell)
+# ✅ Create tables BEFORE routes import
 with app.app_context():
     db.create_all()
 
-# ✅ Import your routes after app + db are defined
+# ✅ Import models first
+from app.models import *
+
+# ✅ Import routes after tables exist
 from app.routes_users import *
 from app.routes_admin import *
-from app.models import *
