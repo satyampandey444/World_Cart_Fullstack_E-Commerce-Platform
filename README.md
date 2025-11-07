@@ -3,7 +3,15 @@
 
 World Cart : World Cart is a comprehensive e-commerce platform designed to facilitate seamless online shopping experiences for users while providing robust management tools for administrators. The platform caters to both consumers looking to purchase a wide range of products and administrators responsible for overseeing the website's operations.
 
+## 🏠 Live Link
 
+🔗 [World Cart on Render](https://world-cart-fullstack-e-commerce-platform.onrender.com)
+
+## 🔐 Admin Demo Login (For Testing Only)
+**Email:** `satyampandey5505@gmail.com`  
+**Password:** `098765`
+
+---
 
 ## Visuals of World Cart
 
@@ -39,8 +47,7 @@ To set up the project, follow these steps:
     python -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
     ```
-3. **Ensure pipenv is Installed:**
->>>>>>> cfc9b0e821c921fb1c1fbe63cad2d583fff73127
+3. **Ensure pipenv is Installed:
     ```bash
     pipenv install
 4. **Install All the Dependencies from requirements.txt:**
@@ -91,6 +98,20 @@ World_Cart_Fullstack_E-Commerce-Platform/
 
 Contributions are welcome!
 If you’d like to improve the project:
+Ways You Can Contribute:
+
+Improve mobile responsiveness
+
+* Add new features
+
+* Optimize performance
+
+* Fix bugs
+
+* Improve documentation
+
+* Enhance admin dashboard
+
 Feel free to Contact
 
 ---
