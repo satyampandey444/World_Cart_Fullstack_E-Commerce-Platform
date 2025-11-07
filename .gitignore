@@ -1,33 +1,24 @@
-# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Virtual environment
 venv/
 env/
 ENV/
 
-# OS files
 .DS_Store
 
-# Node modules (very large)
 node_modules/
 
-# Build folders
 dist/
 build/
 
-# Environment variables
 .env
 
-# Flask session files
 *.session
 
-# Uploads (optional: keep only if you don’t want uploads in repo)
 app/static/product_image/*
 
-# SQLite database (no longer needed)
 *.db
 instance/

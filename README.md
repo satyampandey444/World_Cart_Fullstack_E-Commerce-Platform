@@ -33,13 +33,78 @@ To set up the project, follow these steps:
     git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce-Platform.git
 2. **Ensure pipenv is Installed:**
     ```bash
+    cd World_Cart_Fullstack_E-Commerce-Platform
+2. **Create a Virtual Environment**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
+3. **Ensure pipenv is Installed:**
+>>>>>>> cfc9b0e821c921fb1c1fbe63cad2d583fff73127
+    ```bash
     pipenv install
-3. **Install All the Dependencies from requirements.txt:**
+4. **Install All the Dependencies from requirements.txt:**
      ```bash
      pipenv install -r requirements.txt
-4. **Activate the Virtual Environment**
+5. **Activate the Virtual Environment**
      ```bash
      pipenv shell
-5. **Run the Application**
+6. **Set Up Environment Variables**
+
+     Create a `.env` file for sensitive API keys
+
+7. **Run the Application**
      ```bash
     run app.py# World_Cart_Fullstack_E-Commerce-Platform
+
+## Folder Structure
+```
+World_Cart_Fullstack_E-Commerce-Platform/
+│
+├── app/
+│   ├── __pycache__/
+│   ├── flask_session/
+│   ├── static/
+│   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── helping_functions.py
+│   │   ├── models.py
+│   │   ├── routes_admin.py
+│   │   ├── routes_users.py
+│   │   └── tailwind.config.js
+│
+├── instance/
+├── node_modules/
+├── .env
+├── .gitignore
+├── app.py
+├── COC.txt
+├── package-lock.json
+├── package.json
+├── README.md
+├── requirements.txt
+└── run_tailwind.sh
+```
+---
+
+## 🧑‍💻 Contributing
+
+Contributions are welcome!
+If you’d like to improve the project:
+Feel free to Contact
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** 
+
+---
+
+## 🤝 Connect
+
+Created with ❤️ by Satyam Pandey
+📧 Email: [satyampandey5505@gmail.com](mailto:satyampandey5505@gmail.com)
+🌍 GitHub: [satyampandey444](https://github.com/satyampandey444)
+
+
