@@ -8,7 +8,6 @@ import bcrypt
 import os
 from dotenv import load_dotenv
 
-
 # Load .env variables
 load_dotenv()
 
@@ -16,26 +15,36 @@ load_dotenv()
 UPLOAD_FOLDER = "./app/static/product_image"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-
 class Base(DeclarativeBase):
     pass
 
-
 app = Flask(__name__, static_folder='static')
 
-# ✅ ✅ NEW: USE POSTGRESQL FROM ENVIRONMENT VARIABLE
+# ✅ Use Postgres from Render environment
 database_url = os.environ.get("DATABASE_URL")
 
-# (Render gives postgres:// but SQLAlchemy needs postgresql://)
+# Fix old postgres:// to postgresql://
 if database_url and database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# initialize the app with the extension
+# Initialize database
 db = SQLAlchemy(app, model_class=Base)
 
+# Session config
 app.secret_key = 'satyam_secret_key'
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+# ✅ ✅ Automatically create tables on startup (free alternative to Shell)
+with app.app_context():
+    db.create_all()
+
+# ✅ Import your routes after app + db are defined
+from app.routes_users import *
+from app.routes_admin import *
+from app.models import *
