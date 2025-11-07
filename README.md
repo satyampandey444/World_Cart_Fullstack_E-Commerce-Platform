@@ -9,11 +9,11 @@ World Cart : World Cart is a comprehensive e-commerce platform designed to facil
 
 For users:
 
-![World Cart](https://imgur.com/a/bfGceYQ)
+![World Cart](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHA5ZmJuZnZibXcydmd4cWV2YndoMHVobmU5aTFxdWlwNnhpc3BvNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AnPQkilJjnnTuDdWGF/giphy.gif)
 
 For admins:
 
-![World Cart](https://imgur.com/a/GnFECqw)
+![World Cart](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTFyODVybmJqY24zYnVvcmNnZG1yd2QyMGt0eWd1Y3FwemFpeDdpbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/x594Fj1TWBygBH6TaB/giphy.gif)
 ## Key Features
 * User Functionality: Customers can easily browse products, add items to their cart, and complete purchases in a secure environment.
 * Admin Dashboard: Administrators can manage product listings, including adding, editing, and removing products, as well as monitoring inventory levels.
@@ -30,7 +30,7 @@ To set up the project, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-    git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce_Platform.git
+    git clone https://github.com/satyampandey444/World_Cart_FullStack_E-Commerce-Platform.git
 2. **Ensure pipenv is Installed:**
     ```bash
     pipenv install
