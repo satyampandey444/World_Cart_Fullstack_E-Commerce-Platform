@@ -2,233 +2,156 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block items2 %}
-<nav class="text-white py-4 flex space-x-4 bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-lg shadow-lg">
-    <a href="{{ url_for('admin_transactions') }}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Transactions</a>
-  <a href="{{url_for('add_category')}}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Add Category</a>
-  <a href="{{url_for('add_product')}}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Add Product</a>
-  <a href="{{url_for('edit_pro')}}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Edit Product</a>
-  <a href="{{url_for('delete_pro')}}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Delete Product</a>
-  <a href="{{url_for('admin_logout')}}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Log Out</a>
+<nav class="text-white py-3 flex overflow-x-auto space-x-3 bg-gradient-to-r from-blue-500 to-purple-500 p-3 rounded-lg shadow-lg scrollbar-hide">
+    <a href="{{ url_for('admin_transactions') }}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition whitespace-nowrap">Transactions</a>
+    <a href="{{ url_for('add_category') }}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition whitespace-nowrap">Add Category</a>
+    <a href="{{ url_for('add_product') }}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition whitespace-nowrap">Add Product</a>
+    <a href="{{ url_for('edit_pro') }}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition whitespace-nowrap">Edit Product</a>
+    <a href="{{ url_for('delete_pro') }}" class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition whitespace-nowrap">Delete Product</a>
+    <a href="{{ url_for('admin_logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition whitespace-nowrap">Log Out</a>
 </nav>
 {% endblock %}
 
 {% block body %}
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto px-6 py-8">
-        <h1 class="text-4xl font-bold text-gray-800">Dashboard</h1>
+<div class="bg-gray-100 font-sans px-4 py-8">
+
+    <div class="container mx-auto">
         
+        <!-- Title -->
+        <h1 class="text-4xl font-bold text-gray-800 text-center md:text-left">Dashboard</h1>
+
         <!-- Stats Cards -->
-        <!-- Stats Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center space-x-4">
-        <div class="bg-green-500 text-white p-3 rounded-lg">
-            <i class="fas fa-dollar-sign text-xl"></i>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+
+            <div class="bg-white shadow-lg rounded-lg p-6 flex items-center space-x-4">
+                <div class="bg-green-500 text-white p-3 rounded-lg">
+                    <i class="fas fa-dollar-sign text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700">Total Sales</h2>
+                    <p class="text-2xl font-bold text-green-500">₹{{ total_sales }}</p>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 flex items-center space-x-4">
+                <div class="bg-blue-500 text-white p-3 rounded-lg">
+                    <i class="fas fa-users text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700">Total Users</h2>
+                    <p class="text-2xl font-bold text-blue-500">{{ total_users }}</p>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 flex items-center space-x-4">
+                <div class="bg-purple-500 text-white p-3 rounded-lg">
+                    <i class="fas fa-box text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700">Total Products</h2>
+                    <p class="text-2xl font-bold text-purple-500">{{ total_products }}</p>
+                </div>
+            </div>
+
         </div>
-        <div>
-            <h2 class="text-lg font-semibold text-gray-700">Total Sales</h2>
-            <p class="text-2xl font-bold text-green-500">₹{{ total_sales }}</p>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Total Users</h2>
+                <canvas id="totalUsersChart"></canvas>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Total Products</h2>
+                <canvas id="totalProductsChart"></canvas>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Total Sales</h2>
+                <canvas id="totalSalesChart"></canvas>
+            </div>
+
         </div>
+
+        <!-- User Management -->
+        <h2 class="text-2xl font-bold text-gray-700 mt-12">Manage Users</h2>
+
+        <div class="overflow-x-auto mt-4">
+            <table class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                <thead class="bg-blue-500 text-white">
+                    <tr>
+                        <th class="p-3 text-left">ID</th>
+                        <th class="p-3 text-left">First Name</th>
+                        <th class="p-3 text-left">Last Name</th>
+                        <th class="p-3 text-left">Email</th>
+                        <th class="p-3 text-left">Status</th>
+                        <th class="p-3 text-left">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="p-3">{{ user.id }}</td>
+                        <td class="p-3">{{ user.first }}</td>
+                        <td class="p-3">{{ user.last }}</td>
+                        <td class="p-3 break-all">{{ user.email }}</td>
+                        <td class="p-3">{{ "Blocked" if user.is_blocked else "Active" }}</td>
+                        <td class="p-3">
+                            {% if user.is_blocked %}
+                            <form action="{{ url_for('unblock_user', id=user.id) }}" method="post">
+                                <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Unblock</button>
+                            </form>
+                            {% else %}
+                            <form action="{{ url_for('block_user', id=user.id) }}" method="post">
+                                <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Block</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </div>
-    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center space-x-4">
-        <div class="bg-blue-500 text-white p-3 rounded-lg">
-            <i class="fas fa-users text-xl"></i>
-        </div>
-        <div>
-            <h2 class="text-lg font-semibold text-gray-700">Total Users</h2>
-            <p class="text-2xl font-bold text-blue-500">{{ total_users }}</p>
-        </div>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg p-6 flex items-center space-x-4">
-        <div class="bg-purple-500 text-white p-3 rounded-lg">
-            <i class="fas fa-box text-xl"></i>
-        </div>
-        <div>
-            <h2 class="text-lg font-semibold text-gray-700">Total Products</h2>
-            <p class="text-2xl font-bold text-purple-500">{{ total_products }}</p>
-        </div>
-    </div>
+
 </div>
 
+<!-- Chart.js Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Bar Chart Section for Total Users -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-<div class="bg-white shadow-lg rounded-lg p-6 mt-6">
-    <h2 class="text-lg font-semibold text-gray-700 mb-4">Total Users</h2>
-    <canvas id="totalUsersChart"></canvas>
-</div>
-
-<!-- Bar Chart Section for Total Products -->
-<div class="bg-white shadow-lg rounded-lg p-6 mt-6">
-    <h2 class="text-lg font-semibold text-gray-700 mb-4">Total Products</h2>
-    <canvas id="totalProductsChart"></canvas>
-</div>
-
-<!-- Bar Chart Section for Total Sales -->
-<div class="bg-white shadow-lg rounded-lg p-6 mt-6">
-    <h2 class="text-lg font-semibold text-gray-700 mb-4">Total Sales</h2>
-    <canvas id="totalSalesChart"></canvas>
-</div>
-</div>
-
-
-
-
-        <!-- User Management Section -->
-        <h2 class="text-2xl font-bold text-gray-700 mt-8">Manage Users</h2>
-        <table class="w-full mt-4 bg-white shadow-lg rounded-lg overflow-hidden">
-            <thead class="bg-blue-500 text-white">
-                <tr>
-                    <th class="p-3">ID</th>
-                    <th class="p-3">First Name</th>
-                    <th class="p-3">Last Name</th>
-                    <th class="p-3">Email</th>
-                    <th class="p-3">Status</th>
-                    <th class="p-3">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr class="border-b hover:bg-gray-100">
-                    <td class="p-3">{{ user.id }}</td>
-                    <td class="p-3">{{ user.first }}</td>
-                    <td class="p-3">{{ user.last }}</td>
-                    <td class="p-3">{{ user.email }}</td>
-                    <td class="p-3">{{ "Blocked" if user.is_blocked else "Active" }}</td>
-                    <td class="p-3">
-                        {% if user.is_blocked %}
-                        <form action="{{ url_for('unblock_user', id=user.id) }}" method="post">
-                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Unblock</button>
-                        </form>
-                        {% else %}
-                        <form action="{{ url_for('block_user', id=user.id) }}" method="post">
-                            <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Block</button>
-                        </form>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-
-    
-    
-</body>
 <script>
-    // Bar Chart for Total Users
-    const totalUsersCtx = document.getElementById('totalUsersChart').getContext('2d');
-    new Chart(totalUsersCtx, {
+    // Total Users Chart
+    new Chart(document.getElementById('totalUsersChart'), {
         type: 'bar',
         data: {
             labels: ['Total Users'],
-            datasets: [{
-                label: 'Count',
-                data: [{{ total_users }}],  // Use the total_users data passed from the route
-                backgroundColor: ['#60a5fa'],  // Color for the bar
-                borderColor: ['#3b82f6'],
-                borderWidth: 1
-            }]
+            datasets: [{ data: [{{ total_users }}], backgroundColor: ['#60a5fa'] }]
         },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Count'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false,  // Hide legend for single bar chart
-                },
-                title: {
-                    display: true,
-                    text: 'Total Users'
-                }
-            }
-        }
+        options: { responsive: true, plugins: { legend: { display: false } } }
     });
 
-    // Bar Chart for Total Products
-    const totalProductsCtx = document.getElementById('totalProductsChart').getContext('2d');
-    new Chart(totalProductsCtx, {
+    // Total Products Chart
+    new Chart(document.getElementById('totalProductsChart'), {
         type: 'bar',
         data: {
             labels: ['Total Products'],
-            datasets: [{
-                label: 'Count',
-                data: [{{ total_products }}],  // Use the total_products data passed from the route
-                backgroundColor: ['#fbbf24'],  // Color for the bar
-                borderColor: ['#facc15'],
-                borderWidth: 1
-            }]
+            datasets: [{ data: [{{ total_products }}], backgroundColor: ['#fbbf24'] }]
         },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Count'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false,  // Hide legend for single bar chart
-                },
-                title: {
-                    display: true,
-                    text: 'Total Products'
-                }
-            }
-        }
+        options: { responsive: true, plugins: { legend: { display: false } } }
     });
 
-    // Bar Chart for Total Sales
-    const totalSalesCtx = document.getElementById('totalSalesChart').getContext('2d');
-    new Chart(totalSalesCtx, {
+    // Total Sales Chart
+    new Chart(document.getElementById('totalSalesChart'), {
         type: 'bar',
         data: {
             labels: ['Total Sales'],
-            datasets: [{
-                label: 'Amount',
-                data: [{{ total_sales }}],  // Use the total_sales data passed from the route
-                backgroundColor: ['#34d399'],  // Color for the bar
-                borderColor: ['#4ade80'],
-                borderWidth: 1
-            }]
+            datasets: [{ data: [{{ total_sales }}], backgroundColor: ['#34d399'] }]
         },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Amount'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false,  // Hide legend for single bar chart
-                },
-                title: {
-                    display: true,
-                    text: 'Total Sales'
-                }
-            }
-        }
+        options: { responsive: true, plugins: { legend: { display: false } } }
     });
 </script>
+
 {% endblock %}

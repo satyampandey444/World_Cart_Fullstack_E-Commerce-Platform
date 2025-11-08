@@ -2,9 +2,11 @@
 <html class="h-full">
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" href="{{url_for('static',filename='assets/favicon.png')}}" type="image/x-icon" />
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/flashmsg.css') }}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -13,22 +15,36 @@
 
     {% block Navbar %}
     <nav class="bg-white shadow">
-        <div class="mx-auto px-4 py-4 flex justify-between items-center">
-            <a class="text-4xl font-bold text-indigo-600">World Cart</a>
-            
-            {% block items %}{% endblock %}
-            
-            <div>
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+
+            <!-- Brand / Logo -->
+            <a class="text-3xl sm:text-4xl font-bold text-indigo-600 whitespace-nowrap cursor-pointer">
+                World Cart
+            </a>
+
+            <!-- Navigation Section (Left Items) -->
+            <div class="hidden md:flex space-x-6 text-center">
+                {% block items %}{% endblock %}
+            </div>
+
+            <!-- Right Buttons -->
+            <div class="hidden md:flex space-x-4">
                 {% block items2 %}{% endblock %}
             </div>
+
+            <!-- Mobile menu toggle placeholder if needed in future -->
         </div>
     </nav>
     {% endblock %}
 
     <main class="flex-grow">
+
+        <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
-        <div id="flash-messages" class="mx-auto px-4 py-4 items-center font-sans text-2xl font-extrabold {{ category }} rounded-lg shadow-lg text-center">
+        <div id="flash-messages" 
+             class="mx-auto max-w-lg px-4 py-4 mt-4 font-sans text-xl sm:text-2xl font-extrabold 
+                    {{ category }} rounded-lg shadow-lg text-center break-words">
             {{ message }}
         </div>
         {% endfor %}
@@ -38,8 +54,8 @@
     </main>
 
     <footer class="bg-gray-800 text-white py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 WorldCart. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm sm:text-base">&copy; 2024 WorldCart. All rights reserved.</p>
         </div>
     </footer>
 
@@ -48,7 +64,9 @@
             const flashMessages = document.getElementById('flash-messages');
             if (flashMessages) {
                 setTimeout(() => {
-                    flashMessages.style.display = 'none';
+                    flashMessages.style.opacity = '0';
+                    flashMessages.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => flashMessages.style.display = 'none', 500);
                 }, 4000);
             }
         });
