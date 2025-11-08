@@ -6,24 +6,20 @@
 
 {% block body %}
 
-<h2 class="text-3xl font-bold mb-8 text-center text-indigo-700 px-4">
-    💳 Transaction History
-</h2>
+<h2 class="text-3xl font-bold mb-8 text-center text-indigo-700">💳 Transaction History</h2>
 
 {% if transactions %}
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 pb-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
 
     {% for transaction in transactions %}
     <div class="bg-white shadow-xl rounded-2xl p-6 border border-gray-200 hover:shadow-2xl transition">
-
-        <!-- Header -->
+        
         <div class="flex justify-between items-center mb-4">
             <h3 class="font-bold text-lg text-indigo-600">
                 Transaction #{{ transaction.id }}
             </h3>
 
-            <span class="px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap
+            <span class="px-3 py-1 text-xs font-semibold rounded-full
                 {% if transaction.status == 'Completed' %}
                     bg-green-100 text-green-700 border border-green-300
                 {% elif transaction.status == 'Pending' %}
@@ -36,36 +32,30 @@
             </span>
         </div>
 
-        <!-- User -->
-        <p class="text-gray-500 text-sm mb-3">
+        <p class="text-gray-500 text-sm mb-2">
             🧑 User ID: <span class="font-semibold">{{ transaction.user_id }}</span>
         </p>
 
-        <!-- Items -->
-        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+        <div class="bg-gray-100 p-3 rounded-lg mb-4">
             <h4 class="font-semibold text-gray-700 mb-2">🛍️ Items Purchased:</h4>
 
             {% if transaction.items and transaction.items.items() %}
-                <div class="space-y-1">
-                    {% for item_id, item in transaction.items.items() %}
-                        <div class="flex justify-between text-sm text-gray-800">
-                            <span class="truncate">{{ item.name }} × {{ item.quantity }}</span>
-                            <span class="font-semibold">₹{{ "%.2f"|format(item.price * item.quantity) }}</span>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% for item_id, item in transaction.items.items() %}
+                    <div class="flex justify-between text-sm text-gray-800">
+                        <span>{{ item.name }} × {{ item.quantity }}</span>
+                        <span>₹{{ "%.2f"|format(item.price * item.quantity) }}</span>
+                    </div>
+                {% endfor %}
             {% else %}
                 <p class="text-red-500 text-sm">No items recorded</p>
             {% endif %}
         </div>
 
-        <!-- Total -->
-        <div class="flex justify-between text-gray-700">
+        <div class="flex justify-between mt-4 text-gray-700">
             <p class="font-semibold">Total:</p>
             <p class="font-bold text-indigo-600">₹{{ "%.2f"|format(transaction.total_amount) }}</p>
         </div>
 
-        <!-- Date -->
         <p class="text-sm text-gray-500 text-right mt-3">
             📅 {{ transaction.date.strftime('%Y-%m-%d %H:%M') }}
         </p>
@@ -76,16 +66,12 @@
 </div>
 
 {% else %}
-
-<div class="text-center mt-12 px-4">
-    <p class="text-gray-600 text-xl mb-4">🚫 No transactions found.</p>
-
-    <a href="{{ url_for('index') }}"
-       class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+<div class="text-center mt-10">
+    <p class="text-gray-600 text-xl">🚫 No transactions found.</p>
+    <a href="{{ url_for('index') }}" class="mt-4 inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
         Shop Now →
     </a>
 </div>
-
 {% endif %}
 
 {% endblock %}

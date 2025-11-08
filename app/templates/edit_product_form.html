@@ -2,69 +2,38 @@
 {% block title %}Edit Product{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-8">
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold mb-8 text-center text-indigo-700">Edit Product</h2>
+    <form method="POST" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8 border border-gray-200">
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Name:</label>
+            <input type="text" name="name" value="{{ product.product_name }}" class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300" required>
+        </div>
+        
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Price:</label>
+            <input type="number" name="price" value="{{ product.price }}" class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300" required>
+        </div>
+        
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Quantity:</label>
+            <input type="number" name="quantity" value="{{ product.av_qty }}" class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300" required>
+        </div>
+        
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Description:</label>
+            <textarea name="description" class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300" rows="4">{{ product.description }}</textarea>
+        </div>
 
-    <div class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 border border-gray-200">
-
-        <h2 class="text-3xl font-bold mb-8 text-center text-indigo-700">Edit Product</h2>
-
-        <form method="POST" enctype="multipart/form-data" class="w-full">
-
-            <!-- Product Name -->
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Name:</label>
-                <input type="text" name="name" value="{{ product.product_name }}"
-                       class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
-                       required>
-            </div>
-            
-            <!-- Price -->
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Price:</label>
-                <input type="number" name="price" value="{{ product.price }}"
-                       class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
-                       required>
-            </div>
-
-            <!-- Quantity -->
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Quantity:</label>
-                <input type="number" name="quantity" value="{{ product.av_qty }}"
-                       class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
-                       required>
-            </div>
-
-            <!-- Description -->
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Description:</label>
-                <textarea name="description" rows="4"
-                          class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">{{ product.description }}</textarea>
-            </div>
-
-            <!-- Image Upload -->
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Image:</label>
-                <input type="file" name="image"
-                       class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
-            </div>
-
-            <!-- Buttons -->
-            <div class="flex flex-col sm:flex-row justify-end sm:space-x-2 space-y-3 sm:space-y-0 mt-6">
-
-                <a href="{{ url_for('edit_pro') }}"
-                   class="bg-red-500 text-white px-4 py-2 rounded-md text-sm text-center hover:bg-red-600 transition duration-300">
-                    Cancel
-                </a>
-
-                <button type="submit"
-                        class="bg-indigo-500 text-white px-4 py-2 rounded-md text-sm hover:bg-indigo-600 transition duration-300">
-                    Save
-                </button>
-
-            </div>
-
-        </form>
-    </div>
-
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Image:</label>
+            <input type="file" name="image" class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300">
+        </div>
+        
+        <div class="flex justify-end space-x-2 mt-6">
+                    <a href="{{ url_for('edit_pro') }}" class="bg-red-500 text-white px-4 py-2 rounded-md text-sm hover:bg-red-600 transition duration-300">Cancel</a>
+                    <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded-md text-sm hover:bg-indigo-600 transition duration-300">Save</button>
+                </div>
+    </form>
 </div>
 {% endblock %}

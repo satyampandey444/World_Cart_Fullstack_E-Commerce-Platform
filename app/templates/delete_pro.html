@@ -1,73 +1,35 @@
 {% extends "base.html" %}
-
 {% block title %}
+
     Delete Product
+
 {% endblock %}
 
 {% block body %}
-
-<!-- Header -->
-<header class="bg-white text-black text-center py-16">
+<header class="bg-white-600 text-black text-center py-16">
     <h1 class="text-4xl font-bold mb-4">Delete Product Section</h1>
 </header>
 
-<div class="container mx-auto px-4 py-12">
 
+<div class="mt-5 py-16 container mx-auto px-4">
     <!-- Product List -->
-    <div class="bg-white shadow-lg rounded-lg p-6 max-w-5xl mx-auto">
-
-        <ul id="productList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-
-            {% for product in products %}
-            <li class="p-4 border rounded-lg bg-gray-100 flex flex-col justify-between items-center 
-                       transition-transform transform hover:scale-105"
-                data-id="{{ product.product_id }}">
-
-                <!-- Product Image + Info -->
-                <div class="flex flex-col items-center w-full">
-
-                    <img src="{{ url_for('static', filename=product.image_path) }}"
-                         alt="{{ product.name }}"
-                         class="mb-4 w-full h-48 object-cover rounded-md">
-
-                    <span class="text-lg font-semibold text-gray-700 product-name text-center">
-                        {{ product.name }}
-                    </span>
-
-                    <p class="text-gray-600 text-sm mt-1">
-                        <strong>Price:</strong> ₹<span class="product-price">{{ product.price }}</span>
-                    </p>
-
-                    <p class="text-gray-600 text-sm">
-                        <strong>Quantity:</strong> 
-                        <span class="product-quantity">{{ product.quantity }}</span>
-                    </p>
-
-                    <p class="text-gray-600 text-sm text-center px-2">
-                        <strong>Description:</strong> 
-                        <span class="product-description break-words">{{ product.description }}</span>
-                    </p>
-
-                </div>
-
-                <!-- Delete Button -->
-                <form action="{{ url_for('delete_product', product_id=product.product_id) }}" method="POST"
-                      class="w-full mt-4">
-
-                    <button type="submit"
-                            class="w-full bg-red-600 text-white py-2 rounded-md text-sm font-semibold 
-                                   hover:bg-red-700 transition">
-                        Delete
-                    </button>
-
-                </form>
-
-            </li>
-            {% endfor %}
-
-        </ul>
-
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-3xl mx-auto mt-8">
+      <ul id="productList" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {% for product in products %}
+          <li class="p-4 border rounded-lg bg-gray-100 flex flex-col justify-between items-center transition-transform transform hover:scale-105" data-id="{{ product.product_id }}">
+            <div class="flex flex-col items-center">
+              <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}" class="mb-4 w-full h-48 object-cover rounded-md">
+              <span class="text-lg font-semibold text-gray-700 product-name">{{ product.name }}</span>
+              <p class="text-gray-600"><strong>Price:</strong> ₹<span class="product-price">{{ product.price }}</span></p>
+              <p class="text-gray-600"><strong>Quantity:</strong> <span class="product-quantity">{{ product.quantity }}</span></p>
+              <p class="text-gray-600"><strong>Description:</strong> <span class="product-description">{{ product.description }}</span></p>
+            </div>
+            <form action="{{ url_for('delete_product', product_id=product.product_id) }}" method="POST" style="display:inline;" class="w-full bg-indigo-600 text-white text-center py-2 rounded-md hover:bg-blue-700">
+                <button type="submit" class="btn btn-danger min-w-full text-white text-center py-2 rounded-md  btn-block">Delete</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
-</div>
-
+  </div>
 {% endblock %}

@@ -5,84 +5,68 @@
 {% endblock %}
 
 {% block items %}
-<div class="hidden md:flex space-x-6">
-    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-indigo-600">Home</a>
-    <a href="{{ url_for('search_page') }}" class="text-gray-600 hover:text-indigo-600">Search Products</a>
-    <a href="{{ url_for('new_products') }}" class="text-gray-600 hover:text-indigo-600">New Products</a>
-    <a href="{{ url_for('contact') }}" class="text-gray-600 hover:text-indigo-600">Contact Us</a>
-</div>
+    <div class="hidden md:flex space-x-6">
+        <a href="{{url_for('index')}}" class="text-gray-600 hover:text-indigo-600">Home</a>
+        <a href="{{url_for('search_page')}}" class="text-gray-600 hover:text-indigo-600">Search Products</a>
+        <a href="{{url_for('new_products')}}" class="text-gray-600 hover:text-indigo-600">New Products</a>
+        <a href="{{url_for('contact')}}" class="text-gray-600 hover:text-indigo-600">Contact Us</a>
+    </div>
 {% endblock %}
 
 {% block items2 %}
-<div class="hidden md:flex space-x-4">
-    <a href="{{ url_for('cart') }}" class="bg-white text-black px-4 py-2 rounded-md shadow hover:bg-indigo-400" id="cart-button">
-        🛒 Cart <span id="cart-count">{{ session['cart']|length if session['cart'] else 0 }}</span>
-    </a>
-    <a href="{{ url_for('profile') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Profile</a>
-    <a href="{{ url_for('logout') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Log Out</a>
-</div>
+    <div class="hidden md:flex space-x-4">
+        <a href="{{url_for('cart')}}" class="bg-white text-black px-4 py-2 rounded-md shadow hover:bg-indigo-400" id="cart-button">
+            🛒 Cart <span id="cart-count">{{ session['cart']|length if session['cart'] else 0 }}</span>
+        </a>
+        <a href="{{url_for('profile')}}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Profile</a>
+        <a href="{{url_for('logout')}}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow hover:bg-indigo-700">Log Out</a>
+    </div>
 {% endblock %}
-
 {% block body %}
-<section id="products" class="py-12 bg-gray-100 px-4">
-    <div class="max-w-7xl mx-auto">
-
+<section id="products" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-10">Our New Products</h2>
-
-        <!-- Product Grid -->
-        <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
             {% for product in products %}
-            <div class="bg-white shadow rounded-md p-6 flex flex-col justify-between hover:shadow-lg transition">
-
-                <img src="{{ url_for('static', filename=product.image_path) }}" 
-                     alt="{{ product.name }}" 
-                     class="mb-4 w-full h-48 object-cover rounded-md">
-
+            <div class="bg-white shadow rounded-md p-6 flex flex-col justify-between">
+                <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}" class="mb-4 w-full h-48 object-cover rounded-md">
                 <h3 class="font-bold text-lg">{{ product.name }}</h3>
-                <p class="text-gray-600 mb-2">₹{{ product.price }}</p>
-                <p class="text-gray-600 mb-4">Available Quantity: {{ product.quantity }}</p>
+                <p class="text-gray-600 mb-4">₹{{ product.price }}</p>
+                <p class="text-gray-600 mb-4">Available Quantity : {{ product.quantity }}</p>
 
                 <!-- Buttons -->
-                <div class="flex flex-col space-y-2 w-full">
-
-                    <!-- View details -->
+                <div class="flex flex-col space-y-2">
                     <button onclick="viewDetails('{{ product.name|escape }}', '{{ product.price }}', `{{ product.description|escape }}`)" 
-                        class="w-full bg-indigo-600 text-white text-center py-2 rounded-md hover:bg-gray-600 transition">
+                        class="w-full bg-indigo-600 text-white text-center py-2 rounded-md hover:bg-gray-600">
                         View Details
                     </button>
-
-                    <!-- Form Add to Cart -->
+                    
+                    <!-- Form-based Add to Cart -->
                     <form action="{{ url_for('add_to_cart') }}" method="POST">
                         <input type="hidden" name="id" value="{{ product.name }}">
                         <input type="hidden" name="name" value="{{ product.name }}">
                         <input type="hidden" name="price" value="{{ product.price }}">
                         <input type="hidden" name="image" value="{{ product.image_path }}">
-                        <button type="submit" class="w-full bg-indigo-600 text-white text-center py-2 rounded-md hover:bg-indigo-700 transition">
+                        <button type="submit" class="w-full bg-indigo-600 text-white text-center py-2 rounded-md hover:bg-indigo-700">
                             Add to Cart
                         </button>
                     </form>
-
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+</div>
 
-<!-- Slide-in Details Panel -->
-<div id="details-panel" 
-     class="fixed bottom-4 right-4 w-72 sm:w-80 max-w-full bg-white shadow-lg transform translate-x-full transition-all duration-300 p-4 rounded-lg z-50 border border-gray-300 opacity-0">
-
-    <div class="flex justify-between items-center mb-2">
-        <h3 id="details-name" class="font-bold text-lg"></h3>
-        <button onclick="closeDetails()" 
-                class="bg-red-500 text-white px-2 py-1 rounded-full text-sm hover:bg-red-700 transition">
-            X
-        </button>
-    </div>
-    
-    <p id="details-price" class="text-gray-600 text-sm"></p>
-    <p id="details-description" class="text-gray-700 text-xs mt-1 break-words"></p>
+<!-- Details Slide-in Panel -->
+<div id="details-panel" class="fixed bottom-4 right-4 w-64 h-auto max-h-[200px] bg-white shadow-lg transform translate-x-full transition-all duration-300 p-4 rounded-lg z-50 border border-gray-300 opacity-0">
+<div class="flex justify-between items-center mb-2">
+    <h3 id="details-name" class="font-bold text-lg"></h3>
+    <button onclick="closeDetails()" class="bg-red-500 text-white px-2 py-1 rounded-full text-sm hover:bg-red-700 transition">X</button>
+</div>
+<p id="details-price" class="text-gray-600 text-sm"></p>
+<p id="details-description" class="text-gray-700 text-xs mt-1"></p>
 </div>
 
 <!-- JavaScript -->
@@ -92,6 +76,7 @@ function viewDetails(name, price, description) {
     document.getElementById("details-price").innerText = "₹" + price;
     document.getElementById("details-description").innerText = description;
 
+    // Show the details panel
     let panel = document.getElementById("details-panel");
     panel.classList.remove("translate-x-full", "opacity-0");
     panel.classList.add("opacity-100");
@@ -100,10 +85,11 @@ function viewDetails(name, price, description) {
 function closeDetails() {
     let panel = document.getElementById("details-panel");
     panel.classList.add("opacity-0");
-
     setTimeout(() => {
         panel.classList.add("translate-x-full");
     }, 300);
 }
+
+
 </script>
 {% endblock %}
